@@ -7,15 +7,30 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-
+@CrossOrigin
 public class CompteController {
     @Autowired
     private CompteRepository compteRepository;
     @CrossOrigin
-    @PostMapping(value = "/register", consumes = {"application/json"})
-    public void creerCompte(@RequestBody Compte compte){
+    @PostMapping( "/register")
+    public String creerCompte(@RequestBody Compte compte){
+        List<Compte> lcompte=compteRepository.findAll();
+        for(Compte x:lcompte){
+            if(x.getEmail().equals(compte.getEmail())) return "fail";
+        }
         compteRepository.save(compte);
+        return compte.getId();
     }
+    @CrossOrigin
+    @PostMapping( "/auth")
+    public String SeConnecter(@RequestBody Compte compte){
+        List<Compte> lcompte=compteRepository.findAll();
+        for(Compte x:lcompte){
+            if(compte.equals(x)) return x.getId();
+        }
+        return "fail";
+    }
+
     @CrossOrigin
     @PostMapping("/login")
     public Connexion getConnexion(@RequestBody Compte compte){
