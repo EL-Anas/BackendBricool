@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,6 +33,9 @@ public class OffreController {
     public Offre posteroffre(@RequestBody Offre offre){
         offre.setTitresa();
         System.out.println(offre);
+        if(offre.getTitre().equals("") || offre.getDescription().equals("") || offre.getDomaine().equals("") || offre.getRegion().equals("") || offre.getVille().equals("")){
+            return offre;
+        }
         offrerepository.save(offre);
         return offre;
     }

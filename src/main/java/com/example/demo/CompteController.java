@@ -64,6 +64,20 @@ public class CompteController {
     public Optional<Compte> getCompteById(@PathVariable("Id") String id){
         return compteRepository.findById(id);
     }
+
+    @CrossOrigin
+    @GetMapping("/getNom")
+    public String getNameById(@RequestParam("Id") String id){
+        List<Compte> comptes = compteRepository.findAll();
+        for (Compte c : comptes){
+            if(c.getId().equals(id)){
+                return c.getNom();
+            }
+        }
+        return "fail";
+    }
+
+
 }
 
 
