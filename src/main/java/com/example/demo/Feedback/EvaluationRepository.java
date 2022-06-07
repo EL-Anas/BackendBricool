@@ -8,4 +8,5 @@ import java.util.List;
 @Repository
 public interface EvaluationRepository extends MongoRepository<Evaluation,String> {
     public List<Evaluation> findByIdEvalue(String idEvalue);
+    public int countByIdEvalueEqualsAndNoteEquals(String id,int note);
 }
