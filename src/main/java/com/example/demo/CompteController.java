@@ -76,7 +76,12 @@ public class CompteController {
         }
         return "fail";
     }
-
+    @CrossOrigin
+    @PostMapping("/update")
+    public String updateCompte(@RequestBody Compte compte){
+        compteRepository.save(compte);
+        return "done";
+    }
 
 }
 
