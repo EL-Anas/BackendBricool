@@ -60,12 +60,7 @@ public class OffreController {
     @CrossOrigin
     @GetMapping("/GetOffreEmp/{id}")
     public List<Offre>getOffersEmp(@PathVariable String id){
-        List<Offre> loffre=offrerepository.findAll();
-        List<Offre> roffre=new ArrayList<Offre>();
-        for(Offre x:loffre){
-            if(x.getUtilisateur().getId().equals(id)) roffre.add(x);
-        }
-        return roffre;
+        return offrerepository.findByUtilisateur(new Compte(id,null,null,null,null,null,null,null));
     }
 
     //Methodes de mise en formes
@@ -77,6 +72,36 @@ public class OffreController {
         }
         offres.add(offre);
         return true;
+    }
+    @PutMapping("/UpdateOffre/{Id}/{Idemp}")
+    public Offre AcceptePostulation(@PathVariable("Id") String Id,@PathVariable("Idemp") String Idemp){
+        Offre NewOffre = offrerepository.findById(Id).get();
+        NewOffre.setStatus(Statut.En_cours);
+        NewOffre.setEmployee(Idemp);
+        offrerepository.save(NewOffre);
+        return offrerepository.findById(Id).get();
+
+    }
+    /*
+    @PutMapping("/Employe/{IdOffre}/{Id}")
+    public Offre AffecterOffre(@PathVariable("IdOffre") String IdOffre, @PathVariable("Id") String Id){
+        Offre NewOffre = offrerepository.findById(IdOffre).get();
+        NewOffre.setEmployee(Id);
+        offrerepository.save(NewOffre);
+        return offrerepository.findById(IdOffre).get();
+    }*/
+    @GetMapping("/GetEmployee/{Id}")
+    public List<Offre> GetOffresEmploye(@PathVariable("Id") String id){
+        return offrerepository.findByEmployee(id);
+    }
+    @CrossOrigin
+    @PutMapping("/CloturerOffre/{Id}")
+    public Offre TerminerPostulation(@PathVariable("Id") String Id){
+        Offre NewOffre = offrerepository.findById(Id).get();
+        NewOffre.setStatus(Statut.Coloture);
+        offrerepository.save(NewOffre);
+        return offrerepository.findById(Id).get();
+
     }
 
     public String undefined(String s){

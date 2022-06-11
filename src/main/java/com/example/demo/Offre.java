@@ -1,6 +1,5 @@
 package com.example.demo;
 
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import java.text.DateFormat;
@@ -19,20 +18,22 @@ public class Offre {
     private  String description;
     private  float prix;
     private  String priorité;
-    private  String status;
+    private  Statut status = Statut.active;
     private  String domaine;
     private String region;
     private String ville;
     private String dateP;
     private String dateS;
     private Compte utilisateur;
-    private List<String> images;
+    private String employee;
+    private String images;
+
 
 
     //COnstructeur, setters, getters, equals, hash et toString
     public Offre(){}
 
-    public Offre(String id, String titre, String titresa, String description, String status, String domaine, String region, String ville, String dateP, String dateS, Compte utilisateur, List<String> images) {
+    public Offre(String id, String titre, String titresa, String description, Statut status, String domaine, String region, String ville, String dateP, String dateS, Compte utilisateur, String images, String Employee) {
         this.id = id;
         this.titre = titre;
         this.titresa = titresa;
@@ -44,11 +45,15 @@ public class Offre {
         this.dateP = dateP;
         this.dateS = dateS;
         this.utilisateur = utilisateur;
+        this.employee = Employee;
         this.images = images;
     }
 
     public String getDateP() {
         return dateP;
+    }
+    public void setStatus(Statut status) {
+        this.status = status;
     }
 
     public String getDateS() {
@@ -76,7 +81,7 @@ public class Offre {
     }
 
 
-    public String getStatus() {
+    public Statut getStatus() {
         return status;
     }
 
@@ -104,14 +109,20 @@ public class Offre {
         titresa = unaccentlowercase(getTitre());
     }
 
-    public List<String> getImages() {
+    public String getImages() {
         return images;
     }
 
-    public void setImages(List<String> images) {
+    public void setImages(String images) {
         this.images = images;
     }
+    public String getEmployee() {
+        return employee;
+    }
 
+    public void setEmployee(String employee) {
+        this.employee = employee;
+    }
 
 
     public void setDateS() {
@@ -127,12 +138,12 @@ public class Offre {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Offre offre = (Offre) o;
-        return Objects.equals(id, offre.id) && Objects.equals(titre, offre.titre) && Objects.equals(titresa, offre.titresa) && Objects.equals(description, offre.description) && Objects.equals(status, offre.status) && Objects.equals(domaine, offre.domaine) && Objects.equals(region, offre.region) && Objects.equals(ville, offre.ville) && Objects.equals(dateP, offre.dateP) && Objects.equals(dateS, offre.dateS) && Objects.equals(utilisateur, offre.utilisateur) && Objects.equals(images, offre.images);
+        return Objects.equals(id, offre.id) && Objects.equals(titre, offre.titre) && Objects.equals(titresa, offre.titresa) && Objects.equals(description, offre.description) && Objects.equals(status, offre.status) && Objects.equals(domaine, offre.domaine) && Objects.equals(region, offre.region) && Objects.equals(ville, offre.ville) && Objects.equals(dateP, offre.dateP) && Objects.equals(dateS, offre.dateS) && Objects.equals(utilisateur, offre.utilisateur)&& Objects.equals(employee, offre.employee) && Objects.equals(images, offre.images);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, titre, titresa, description, prix, priorité, status, domaine, region, ville, dateP, dateS, utilisateur, images);
+        return Objects.hash(id, titre, titresa, description, prix, priorité, status, domaine, region, ville, dateP, dateS, utilisateur, images, employee);
     }
 
     @Override
@@ -148,7 +159,8 @@ public class Offre {
                 ", ville='" + ville + '\'' +
                 ", dateP='" + dateP + '\'' +
                 ", dateS='" + dateS + '\'' +
-                ", employeur=" + utilisateur +
+                ", employeur=" + utilisateur + '\''+
+                ",employee="+ employee + '\''+
                 ", images=" + images +
                 '}';
     }

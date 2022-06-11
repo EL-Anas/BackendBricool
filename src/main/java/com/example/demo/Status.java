@@ -1,7 +1,7 @@
 package com.example.demo;
 
-public enum Status {
-    JOIN,
-    MESSAGE,
-    LEAVE,
+enum Statut {
+    active,
+    En_cours,
+    Coloture
 }
