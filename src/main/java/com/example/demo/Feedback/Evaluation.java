@@ -5,11 +5,12 @@ import org.springframework.data.annotation.Id;
 public class Evaluation {
     @Id
     private String idEvaluation;
-    private String idEvalue,nomEvaluateur,note,comment,date;
+    private String idEvalue,idEvaluateur,nomEvaluateur,note,comment,date;
 
-    public Evaluation(String idEvaluation, String idEvalue, String nomEvaluateur, String note, String comment, String date) {
+    public Evaluation(String idEvaluation, String idEvalue,String idEvaluateur ,String nomEvaluateur, String note, String comment, String date) {
         this.idEvaluation = idEvaluation;
         this.idEvalue = idEvalue;
+        this.idEvaluateur=idEvaluateur;
         this.nomEvaluateur = nomEvaluateur;
         this.note = note;
         this.comment = comment;
@@ -38,6 +39,13 @@ public class Evaluation {
 
     public void setIdEvalue(String idEvalue) {
         this.idEvalue = idEvalue;
+    }
+    public String getIdEvaluateur() {
+        return idEvaluateur;
+    }
+
+    public void setIdEvaluateur(String idEvaluateur) {
+        this.idEvaluateur = idEvaluateur;
     }
 
     public String getNomEvaluateur() {
