@@ -13,7 +13,7 @@ public class RatingAvg {
         return utilisateur;
     }
 
-    public void setUtilisatuer(Compte utilisateur) {
+    public void setUtilisateur(Compte utilisateur) {
         this.utilisateur = utilisateur;
     }
 

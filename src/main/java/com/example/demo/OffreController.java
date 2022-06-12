@@ -29,15 +29,11 @@ public class OffreController {
         }
         return s2;
     }
-    @GetMapping("/get3")
-    public List<Offre> get3Offre(){
+    @GetMapping("/getall")
+    public List<Offre> getOffre(){
         List<Offre> s1;
-        s1 =offrerepository.findAll();
-        List<Offre> s2 = new ArrayList<>();
-        s2.add(s1.get(1));
-        s2.add(s1.get(2));
-        s2.add(s1.get(3));
-        return s2;
+        return offrerepository.findAll();
+
     }
 
     @GetMapping("/getuser")
